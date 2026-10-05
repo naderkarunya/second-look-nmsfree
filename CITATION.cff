@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the repository (and the paper once it is published)."
+title: "A second look at NMS-free real-time pedestrian detection in crowds: relation-aware re-scoring of the one-to-one output of YOLO26"
+authors:
+  - family-names: Salam
+    given-names: Nader
+  - family-names: Jebaseeli
+    given-names: T. Jemima
+  - family-names: Shirly
+    given-names: S.
+  - family-names: Sulaiman
+    given-names: Sadiya
+year: 2026
+repository-code: "https://github.com/<user>/second-look-nmsfree"
+license: AGPL-3.0
