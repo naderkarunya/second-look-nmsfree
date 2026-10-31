@@ -25,10 +25,10 @@ src/        the method and the evaluation tools
   cp_eval.py         CityPersons MR⁻² evaluator (Reasonable / Small / Heavy / Partial / Bare / All)
   train_run.py       one detector training run from the command line (used for the pilot experiments)
 notebooks/main/      the Kaggle notebooks that produced the results of the paper (Runs 5-9, see TABLES.md)
-notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (Table 11)
+notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (the loss-level vs feature-level comparison of Section V-B)
 results/             the raw summary files written by the notebooks (JSON), exactly as used for the tables
-analysis/            scripts that turn detections into the analyses and figures of Section 5
-figures/             the figures of Section 5 as generated
+analysis/            scripts that turn detections into the analyses and figures of Section V
+figures/             the figures of Section V as generated
 ```
 
 ## Setup
@@ -74,20 +74,30 @@ write the `results/summary_run*.json` files.
 
 ## Trained weights
 
-The detectors (A, B, C on CrowdHuman; B on CityPersons) and all heads are published as a release asset of this
-repository: see the **Releases** page (`weights.zip`). File names follow the notebooks (`yolo26s-p2_baseline_s0_e16_f1.0/weights/best.pt`, `slr_on_B_noocc/slr.pt`, ...).
+The detectors (A, B, C on CrowdHuman; B on CityPersons) and the heads listed below are published as release assets of this repository (Releases → v1.0):
 
-## Analyses and figures of Section 5
+| Archive | Contents |
+|---|---|
+| `detectors_crowdhuman.zip` | `A.pt` (YOLO26s) and `B.pt` (YOLO26s-P2), trained on CrowdHuman, 16 epochs, seed 0 — B is the base of the final model; `slr_on_C_s2.pt` (SLR-V head on C, seed 2) |
+| `5.zip` | detector C (`ckpts/p2vw_full.pt`, YOLO26s-P2 with the visibility-weighted loss), the evaluation scripts, logs and the scored detections of A |
+| `6.zip` | Second-Look heads on CrowdHuman (`runs/*/slr.pt` with `train_info.json`): `slr_on_B_noocc` (SLR, the final head), `slr_on_B_norel` (without relation features), `slr_on_B_s1` (SLR-V, seed 1), `slr_on_A` (head on A) |
+| `7b.zip` | CityPersons: detector B trained on CityPersons (`runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt`) and its heads `cp_head_noocc` (SLR) and `cp_head_occ` (SLR-V) |
 
-With the exported detection files of step 3-4 (`dt.txt` of the NMS output, `*_basedt.txt` of the one-to-one output,
+The remaining head seeds of Tables 6, 7 and 9 (SLR-V on B, seed 0; SLR-V on C, seeds 0–1) can be retrained in about 1.5 h each with the commands above (step 4, without `--no-occ`); their summary files are in `results/`.
+
+File names follow the notebooks (`yolo26s-p2_baseline_s0_e16_f1.0/weights/best.pt`, `slr_on_B_noocc/slr.pt`, ...).
+
+## Analyses and figures of Section V
+
+With the exported detection files of steps 3-4 (`dt.txt` of the NMS output, `*_basedt.txt` of the one-to-one output,
 `*dt.txt` of the head) and `annotation_val.odgt` in a folder `data/`:
 
 ```
 python analysis/analysis5.py        # operating points at 1 FPPI, error categories, score-shift statistics, MR-FPPI curves, density bins
 python analysis/size_subsets.py     # Small / Medium / Large subsets with the official evaluator
 python analysis/numbers5.py         # compiles results/*.json into results/numbers5.json (the single source of every table)
-python analysis/figs5_real.py       # Figs. 6-9 of the full manuscript (gap chart, subsets, head behaviour, curves/density)
-python analysis/figs5_qual.py       # Figs. 10-12 (qualitative, three-output grid, failure cases); --two for the two-row versions
+python analysis/figs5_real.py       # Figs. 3-4 of the paper (head behaviour; MR-FPPI curves and crowd-size bins) and the gap/subset charts
+python analysis/figs5_qual.py       # Figs. 5-6 of the paper (three-output grid, failure cases); --two for the two-row versions
 ```
 
 ## Licence
