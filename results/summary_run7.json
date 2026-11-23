@@ -1,0 +1,143 @@
+{
+  "cp_B_in__nms": {
+    "reasonable": 13.77,
+    "small": 19.96,
+    "heavy": 45.1,
+    "partial": 14.6,
+    "bare": 9.11,
+    "all": 37.41
+  },
+  "cp_B_in__nmsfree": {
+    "reasonable": 21.5,
+    "small": 24.94,
+    "heavy": 50.52,
+    "partial": 23.17,
+    "bare": 15.13,
+    "all": 44.11
+  },
+  "cp_B_in__slr_noocc": {
+    "reasonable": 16.1,
+    "small": 22.31,
+    "heavy": 45.28,
+    "partial": 17.23,
+    "bare": 10.56,
+    "all": 39.09
+  },
+  "cp_B_in__slr_noocc_base": {
+    "reasonable": 21.5,
+    "small": 24.97,
+    "heavy": 50.05,
+    "partial": 22.67,
+    "bare": 15.1,
+    "all": 44.13
+  },
+  "cp_B_in__slr_occ": {
+    "reasonable": 16.25,
+    "small": 22.27,
+    "heavy": 45.27,
+    "partial": 17.0,
+    "bare": 10.72,
+    "all": 39.59
+  },
+  "cp_B_in__slr_occ_base": {
+    "reasonable": 21.5,
+    "small": 24.97,
+    "heavy": 50.05,
+    "partial": 22.67,
+    "bare": 15.1,
+    "all": 44.13
+  },
+  "xd_B__nms": {
+    "reasonable": 21.62,
+    "small": 31.26,
+    "heavy": 62.53,
+    "partial": 23.54,
+    "bare": 15.89,
+    "all": 49.07
+  },
+  "xd_B__nmsfree": {
+    "reasonable": 25.71,
+    "small": 33.17,
+    "heavy": 64.56,
+    "partial": 27.21,
+    "bare": 19.68,
+    "all": 52.79
+  },
+  "xd_B__slr_noocc": {
+    "reasonable": 21.94,
+    "small": 32.26,
+    "heavy": 60.97,
+    "partial": 23.68,
+    "bare": 16.31,
+    "all": 48.23
+  },
+  "xd_B__slr_noocc_base": {
+    "reasonable": 25.63,
+    "small": 33.3,
+    "heavy": 64.55,
+    "partial": 27.24,
+    "bare": 19.59,
+    "all": 52.6
+  },
+  "xd_B__slr_occ": {
+    "reasonable": 21.78,
+    "small": 32.97,
+    "heavy": 59.39,
+    "partial": 23.1,
+    "bare": 16.43,
+    "all": 48.02
+  },
+  "xd_B__slr_occ_base": {
+    "reasonable": 25.63,
+    "small": 33.3,
+    "heavy": 64.55,
+    "partial": 27.24,
+    "bare": 19.59,
+    "all": 52.6
+  },
+  "cp_B_in__run_info": {
+    "mode": "baseline",
+    "max_hours": 3.3,
+    "epochs_done": 38,
+    "vis_weight": 0.0,
+    "vis_weight_norm": true,
+    "vra": "none",
+    "crm": false,
+    "hg": false,
+    "vba": false,
+    "base": "yolo26s-p2",
+    "epochs": 60,
+    "fraction": 1.0,
+    "seed": 0,
+    "imgsz": 1280,
+    "batch": 8,
+    "train_hours": 3.371,
+    "save_dir": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280"
+  },
+  "cp_head_occ__train_info": {
+    "weights": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt",
+    "epochs": 10,
+    "fraction": 1.0,
+    "k": 500,
+    "occ": true,
+    "score_only": true,
+    "soft": false,
+    "rel": true,
+    "seed": 0,
+    "hours": 0.512,
+    "iters": 3720
+  },
+  "cp_head_noocc__train_info": {
+    "weights": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt",
+    "epochs": 10,
+    "fraction": 1.0,
+    "k": 500,
+    "occ": false,
+    "score_only": true,
+    "soft": false,
+    "rel": true,
+    "seed": 0,
+    "hours": 0.526,
+    "iters": 3720
+  }
+}

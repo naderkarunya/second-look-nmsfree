@@ -30,7 +30,7 @@ src/        the method and the evaluation tools
   train_run.py       one detector training run from the command line (used for the pilot experiments)
 notebooks/main/      the Kaggle notebooks that produced the results of the paper (Runs 5-9, see TABLES.md)
 notebooks/revision/  the Kaggle notebooks of the experiments added in the revision (Rev1-Rev4)
-notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (Table 11)
+notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (Section V-B)
 results/             the raw summary files written by the notebooks (JSON), exactly as used for the tables
   revision/          numbers of the revision experiments (Tables 2, 8, 9, 10, 14, 15)
 analysis/            scripts that turn detections into the analyses and figures of Section 5

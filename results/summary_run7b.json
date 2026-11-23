@@ -1,0 +1,95 @@
+{
+  "cp_B_in__nms": {
+    "reasonable": 12.66,
+    "small": 18.93,
+    "heavy": 41.78,
+    "partial": 13.19,
+    "bare": 8.22,
+    "all": 35.57
+  },
+  "cp_B_in__nmsfree": {
+    "reasonable": 17.83,
+    "small": 22.24,
+    "heavy": 45.3,
+    "partial": 17.38,
+    "bare": 13.14,
+    "all": 40.68
+  },
+  "cp_B_in__slr_noocc": {
+    "reasonable": 14.37,
+    "small": 20.76,
+    "heavy": 43.34,
+    "partial": 15.01,
+    "bare": 9.9,
+    "all": 36.83
+  },
+  "cp_B_in__slr_noocc_base": {
+    "reasonable": 17.74,
+    "small": 22.19,
+    "heavy": 45.22,
+    "partial": 17.36,
+    "bare": 12.96,
+    "all": 40.56
+  },
+  "cp_B_in__slr_occ": {
+    "reasonable": 14.68,
+    "small": 20.88,
+    "heavy": 43.2,
+    "partial": 15.05,
+    "bare": 9.97,
+    "all": 37.04
+  },
+  "cp_B_in__slr_occ_base": {
+    "reasonable": 17.74,
+    "small": 22.19,
+    "heavy": 45.22,
+    "partial": 17.36,
+    "bare": 12.96,
+    "all": 40.56
+  },
+  "cp_B_in__run_info": {
+    "mode": "baseline",
+    "max_hours": 5.6,
+    "epochs_done": 60,
+    "vis_weight": 0.0,
+    "vis_weight_norm": true,
+    "vra": "none",
+    "crm": false,
+    "hg": false,
+    "vba": false,
+    "base": "yolo26s-p2",
+    "epochs": 60,
+    "fraction": 1.0,
+    "seed": 0,
+    "imgsz": 1280,
+    "batch": 8,
+    "train_hours": 5.068,
+    "save_dir": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280"
+  },
+  "cp_head_occ__train_info": {
+    "weights": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt",
+    "epochs": 10,
+    "fraction": 1.0,
+    "k": 500,
+    "occ": true,
+    "score_only": true,
+    "soft": false,
+    "rel": true,
+    "seed": 0,
+    "hours": 0.552,
+    "iters": 3720
+  },
+  "cp_head_noocc__train_info": {
+    "weights": "/kaggle/working/runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt",
+    "epochs": 10,
+    "fraction": 1.0,
+    "k": 500,
+    "occ": false,
+    "score_only": true,
+    "soft": false,
+    "rel": true,
+    "seed": 0,
+    "hours": 0.55,
+    "iters": 3720
+  }
+}

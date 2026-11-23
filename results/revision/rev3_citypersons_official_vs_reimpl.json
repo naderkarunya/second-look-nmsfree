@@ -1,0 +1,7 @@
+{"cross_B_nms": {"ours": {"reasonable": 21.62,"small": 31.26,"heavy": 62.53,"partial": 23.54,"bare": 15.89,"all": 49.07},"official": {"Reasonable": 21.62,"Reasonable_small": 30.73,"Reasonable_occ=heavy": 62.4,"All": 49.07}},
+"cross_B_o2o": {"ours": {"reasonable": 25.71,"small": 33.17,"heavy": 64.56,"partial": 27.21,"bare": 19.68,"all": 52.79},"official": {"Reasonable": 25.71,"Reasonable_small": 32.56,"Reasonable_occ=heavy": 64.41,"All": 52.79}},
+"cross_B_slr": {"ours": {"reasonable": 21.81,"small": 32.28,"heavy": 61.06,"partial": 23.77,"bare": 16.2,"all": 48.18},"official": {"Reasonable": 21.81,"Reasonable_small": 31.73,"Reasonable_occ=heavy": 60.96,"All": 48.18}},
+"in_B_nms": {"ours": {"reasonable": 12.66,"small": 18.93,"heavy": 41.78,"partial": 13.19,"bare": 8.22,"all": 35.57},"official": {"Reasonable": 12.66,"Reasonable_small": 18.47,"Reasonable_occ=heavy": 41.71,"All": 35.57}},
+"in_B_o2o": {"ours": {"reasonable": 17.83,"small": 22.24,"heavy": 45.3,"partial": 17.38,"bare": 13.14,"all": 40.68},"official": {"Reasonable": 17.83,"Reasonable_small": 21.68,"Reasonable_occ=heavy": 45.21,"All": 40.68}},
+"in_B_slr": {"ours": {"reasonable": 14.42,"small": 20.75,"heavy": 43.31,"partial": 15.06,"bare": 9.91,"all": 36.91},"official": {"Reasonable": 14.42,"Reasonable_small": 20.25,"Reasonable_occ=heavy": 43.23,"All": 36.91}},
+"in_B_slrv": {"ours": {"reasonable": 14.7,"small": 20.93,"heavy": 43.21,"partial": 15.04,"bare": 9.95,"all": 37.06},"official": {"Reasonable": 14.7,"Reasonable_small": 20.4,"Reasonable_occ=heavy": 43.12,"All": 37.06}}}
