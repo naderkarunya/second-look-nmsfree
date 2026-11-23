@@ -3,14 +3,16 @@
 Code, notebooks, raw results and trained weights for the paper
 
 > *A second look at NMS-free real-time pedestrian detection in crowds: relation-aware re-scoring of the one-to-one output of YOLO26*
-> N. Salam, T. J. Jebaseeli, S. Shirly, S. Sulaiman — manuscript under review.
+> N. Salam, T. J. Jebaseeli, S. Shirly, S. Sulaiman — manuscript under review at IEEE Access (revised version).
 
 The paper measures the gap between the NMS-free (one-to-one) output and the NMS (one-to-many) output of a trained
 YOLO26 network on crowded scenes, and proposes a **Second-Look re-scoring head (SLR)**: a small second-stage module
-(0.97 M parameters, 3.1 GFLOPs, 4.6 ms on a T4) that re-scores the 500 one-to-one candidates of a frozen detector from
+(0.97 M parameters, 3.1 GFLOPs, 4.7 ms on a T4) that re-scores the 500 one-to-one candidates of a frozen detector from
 their pooled appearance, geometry and the relation to their strongest higher-scored overlapping neighbour. On CrowdHuman
 it raises the NMS-free output of YOLO26s-P2 from 87.90 to 89.96 AP, lowers MR⁻² from 52.47 to 47.52 and raises JI from
-75.90 to 79.49, above the NMS output of the same network. Every table and figure of the paper can be regenerated from
+75.90 to 79.49, above the NMS output of the same network and above Hard-NMS and Soft-NMS applied to the same
+candidates. Without retraining, the head also closes most of the one-to-one deficit on CityPersons and on MOT20, where it
+performs on par with the NMS output. Every table and figure of the paper can be regenerated from
 the files in this repository; see [TABLES.md](TABLES.md) for the mapping.
 
 ## Repository layout
@@ -22,13 +24,17 @@ src/        the method and the evaluation tools
   prepare_data.py    CrowdHuman / CityPersons -> YOLO label format (keeps visible-body boxes)
   export_eval.py     exports detections (NMS or one-to-one) and scores them with the official CrowdDet evaluator
   score_subsets.py   AP / MR⁻² / JI on the Light / Heavy / Severe visibility subsets
-  cp_eval.py         CityPersons MR⁻² evaluator (Reasonable / Small / Heavy / Partial / Bare / All)
+  cp_eval.py         CityPersons MR⁻² re-implementation (used for Partial / Bare; the paper uses the official code for the other subsets)
+  mot20_prep.py      MOT20 training sequences -> CrowdHuman-style evaluation set (revision, cross-dataset test)
+  rev_tools.py       Hard-NMS / Soft-NMS on the same candidates, paired bootstrap, latency timers (revision)
   train_run.py       one detector training run from the command line (used for the pilot experiments)
 notebooks/main/      the Kaggle notebooks that produced the results of the paper (Runs 5-9, see TABLES.md)
-notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (the loss-level vs feature-level comparison of Section V-B)
+notebooks/revision/  the Kaggle notebooks of the experiments added in the revision (Rev1-Rev4)
+notebooks/pilot/     earlier notebooks: pilot protocol, seed study, feature-level visibility variants (Table 11)
 results/             the raw summary files written by the notebooks (JSON), exactly as used for the tables
-analysis/            scripts that turn detections into the analyses and figures of Section V
-figures/             the figures of Section V as generated
+  revision/          numbers of the revision experiments (Tables 2, 8, 9, 10, 14, 15)
+analysis/            scripts that turn detections into the analyses and figures of Section 5
+figures/             the figures of Section 5 as generated
 ```
 
 ## Setup
@@ -72,32 +78,34 @@ feature of the strongest higher-scored neighbour), `--no-occ` (plain head = fina
 with the visibility branch). The notebooks in `notebooks/main/` run exactly these commands on Kaggle (two T4 GPUs) and
 write the `results/summary_run*.json` files.
 
+## Datasets added in the revision
+
+[MOT20](https://motchallenge.net/data/MOT20/) training sequences (used only for evaluation, never for training):
+
+```
+python src/mot20_prep.py --root /path/MOT20/train --out data/mot20 --step 5   # 1,787 frames, 220,626 pedestrians
+```
+
+The CityPersons numbers of the revised paper are computed with the official evaluation code of
+[cvgroup-njust/CityPersons](https://github.com/cvgroup-njust/CityPersons); `notebooks/revision/Rev3_*` shows how the
+predictions are converted (`rev_tools.cp_to_coco`).
+
 ## Trained weights
 
-The detectors (A, B, C on CrowdHuman; B on CityPersons) and the heads listed below are published as release assets of this repository (Releases → v1.0):
+The detectors (A, B, C on CrowdHuman; B on CityPersons) and all heads are published as a release asset of this
+repository: see the **Releases** page (`weights.zip`). File names follow the notebooks (`yolo26s-p2_baseline_s0_e16_f1.0/weights/best.pt`, `slr_on_B_noocc/slr.pt`, ...).
 
-| Archive | Contents |
-|---|---|
-| `detectors_crowdhuman.zip` | `A.pt` (YOLO26s) and `B.pt` (YOLO26s-P2), trained on CrowdHuman, 16 epochs, seed 0 — B is the base of the final model; `slr_on_C_s2.pt` (SLR-V head on C, seed 2) |
-| `5.zip` | detector C (`ckpts/p2vw_full.pt`, YOLO26s-P2 with the visibility-weighted loss), the evaluation scripts, logs and the scored detections of A |
-| `6.zip` | Second-Look heads on CrowdHuman (`runs/*/slr.pt` with `train_info.json`): `slr_on_B_noocc` (SLR, the final head), `slr_on_B_norel` (without relation features), `slr_on_B_s1` (SLR-V, seed 1), `slr_on_A` (head on A) |
-| `7b.zip` | CityPersons: detector B trained on CityPersons (`runs/yolo26s-p2_baseline_s0_e60_cp1280/weights/best.pt`) and its heads `cp_head_noocc` (SLR) and `cp_head_occ` (SLR-V) |
+## Analyses and figures of Section 5
 
-The remaining head seeds of Tables 6, 7 and 9 (SLR-V on B, seed 0; SLR-V on C, seeds 0–1) can be retrained in about 1.5 h each with the commands above (step 4, without `--no-occ`); their summary files are in `results/`.
-
-File names follow the notebooks (`yolo26s-p2_baseline_s0_e16_f1.0/weights/best.pt`, `slr_on_B_noocc/slr.pt`, ...).
-
-## Analyses and figures of Section V
-
-With the exported detection files of steps 3-4 (`dt.txt` of the NMS output, `*_basedt.txt` of the one-to-one output,
+With the exported detection files of step 3-4 (`dt.txt` of the NMS output, `*_basedt.txt` of the one-to-one output,
 `*dt.txt` of the head) and `annotation_val.odgt` in a folder `data/`:
 
 ```
 python analysis/analysis5.py        # operating points at 1 FPPI, error categories, score-shift statistics, MR-FPPI curves, density bins
 python analysis/size_subsets.py     # Small / Medium / Large subsets with the official evaluator
 python analysis/numbers5.py         # compiles results/*.json into results/numbers5.json (the single source of every table)
-python analysis/figs5_real.py       # Figs. 3-4 of the paper (head behaviour; MR-FPPI curves and crowd-size bins) and the gap/subset charts
-python analysis/figs5_qual.py       # Figs. 5-6 of the paper (three-output grid, failure cases); --two for the two-row versions
+python analysis/figs5_real.py       # gap chart, subsets, head behaviour (Figure 3), curves/density (Figure 4)
+python analysis/figs5_qual.py       # qualitative grid (Figure 5) and failure cases (Figure 6); --two for the two-row versions
 ```
 
 ## Licence
