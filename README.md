@@ -92,8 +92,23 @@ predictions are converted (`rev_tools.cp_to_coco`).
 
 ## Trained weights
 
-The detectors (A, B, C on CrowdHuman; B on CityPersons) and all heads are published as a release asset of this
-repository: see the **Releases** page (`weights.zip`). File names follow the notebooks (`yolo26s-p2_baseline_s0_e16_f1.0/weights/best.pt`, `slr_on_B_noocc/slr.pt`, ...).
+The trained models are published as `weights.zip` on the **Releases** page of this repository
+(`weights/README.txt` inside the archive lists every file with its SHA-256):
+
+| File | Model |
+|---|---|
+| `detectors/A_yolo26s_crowdhuman.pt` | model A, YOLO26s, CrowdHuman, 16 epochs |
+| `detectors/B_yolo26s-p2_crowdhuman.pt` | model B, YOLO26s-P2, CrowdHuman, 16 epochs (base of the final model) |
+| `detectors/C_yolo26s-p2-vw_crowdhuman.pt` | model C, YOLO26s-P2 with the visibility-weighted loss |
+| `detectors/B_yolo26s-p2_citypersons.pt` | YOLO26s-P2 trained on CityPersons, 60 epochs, 1,280 px |
+| `heads/B_SLR_final_seed0.pt` | **final model**: Second-Look head on B, no visibility branch |
+| `heads/B_SLR-V_seed0.pt`, `heads/B_SLR-V_seed1.pt` | head with the visibility branch on B |
+| `heads/B_SLR-V_without_relation.pt` | head with the visibility branch, without relation features |
+| `heads/A_SLR-V_seed0.pt`, `heads/C_SLR-V_seed2.pt` | head with the visibility branch on A and on C |
+| `heads/CityPersons_B_SLR.pt`, `heads/CityPersons_B_SLR-V.pt` | heads on the CityPersons detector |
+
+Seeds 1 and 2 of the final head and the geometry-only and geometry + relation heads are trained by
+`notebooks/revision/Rev2_head_variants_and_seeds.ipynb`.
 
 ## Analyses and figures of Section 5
 

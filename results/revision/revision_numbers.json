@@ -42,7 +42,7 @@
   "rev3_latency_complete_pipeline_median_p95": {
     "_table": "Table 15",
     "framework_predictor": {"B_o2m_nms": [17.50, 19.63], "B_o2o": [16.69, 18.07], "A_o2m_nms": [14.90, 16.44], "A_o2o": [14.38, 15.74]},
-    "reference_pipeline": {"B_o2o_raw": [26.98, 28.96], "B_slr": [31.65, 33.98], "B_hard_nms_iou050": [27.58, 29.49], "B_soft_nms_cpu": [31.12, 47.78], "A_o2o_raw": [22.33, 24.44], "A_slr": [26.57, 28.40]},
+    "reference_pipeline": {"B_o2o_raw": [26.98, 28.96], "B_slr": [31.65, 33.98], "B_hard_nms_iou050": [27.58, 29.49], "B_soft_nms_cpu": [31.12, 47.78], "A_o2o_raw": [22.33, 24.44], "A_slr_v": [26.57, 28.40]},
     "nms_routine_B": {"boxes_into_nms_median": 508, "boxes_into_nms_max": 10244, "routine_time_ms_median": 0.98, "routine_time_ms_max": 34.0},
     "images_above_500ms": 0
   },

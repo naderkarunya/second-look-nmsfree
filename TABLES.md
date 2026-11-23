@@ -11,7 +11,7 @@ evaluator on the set built by `src/mot20_prep.py`.
 | Table 1 | Dataset statistics (CrowdHuman, CityPersons, MOT20) | `src/prepare_data.py`, `src/mot20_prep.py` | official annotation files |
 | Table 2 | Official CityPersons evaluator vs. re-implementation, same predictions | revision/Rev3 | revision/rev3_citypersons_official_vs_reimpl.json |
 | Table 3 | Implementation and training settings | — | — |
-| Table 4, lower part | A, B, C; A + SLR; C + SLR-V; **B + SLR** (seed 0 and three seeds) | main/Run5, main/Run6, revision/Rev2 | summary_run5.json, summary_run6.json, revision/revision_numbers.json |
+| Table 4, lower part | A, B, C; A + SLR-V; C + SLR-V; **B + SLR** (seed 0 and three seeds) | main/Run5, main/Run6, revision/Rev2 | summary_run5.json, summary_run6.json, revision/revision_numbers.json |
 | Table 5, lower part | CityPersons in-domain: B both outputs, + SLR-V, + SLR | main/Run7b, revision/Rev3 | summary_run7b.json, revision/rev3_citypersons_official_vs_reimpl.json |
 | Table 6 | NMS-free deficit of A, B, C and gain of the head | main/Run5, main/Run6 | summary_run5.json, summary_run6.json |
 | Table 7 | Component ablation: (a) structure, (b) supervision | main/Run5, main/Run6, revision/Rev2 | as Table 4 |
